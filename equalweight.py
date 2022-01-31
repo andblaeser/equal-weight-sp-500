@@ -4,8 +4,6 @@ import requests
 import xlsxwriter
 import math
 
-#api_url = 'https://cloud.iexapis.com/'
-
 stocks = pd.read_csv('sp_500_stocks.csv')
 
 def chunks(lst, n):
@@ -24,7 +22,7 @@ my_columns = ['Ticker', 'Stock Price', 'Market Capitalization', 'Number of Share
 final_dataframe = pd.DataFrame(columns = my_columns)
 
 for symbol_string in symbol_strings:
-    batch_api_call_url = f'https://sandbox.iexapis.com/stable/stock/market/batch?symbols={symbol_string}&types=quote&token={IEX_CLOUD_API_TOKEN}'
+    batch_api_call_url = f'https://cloud.iexapis.com/stable/stock/market/batch?symbols={symbol_string}&types=quote&token={IEX_CLOUD_API_TOKEN}'
     data = requests.get(batch_api_call_url).json()
     for symbol in symbol_string.split(','):
         final_dataframe = final_dataframe.append(
